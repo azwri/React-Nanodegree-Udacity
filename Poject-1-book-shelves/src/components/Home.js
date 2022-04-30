@@ -1,25 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import Shelf from './Shelf'
 import { getAll, update } from '../BooksAPI'
 
-const Home = () => {
-
-    // get all books from the API
-    const [books, setBooks] = useState([])
-    React.useEffect(() => {
-        getAll().then(books => setBooks(books))
-    }, [])
-
-
-    // change shelf of a book in the API and update the state of the books
-    const changeShelf = async (book, shelf) => {
-        await update(book, shelf)
-        await getAll().then(books => setBooks(books))
-    }
-
-
-
+const Home = ({ books, category, changeShelf }) => {
     return (
         <div className="list-books">
             <div className="list-books-title">
