@@ -28,7 +28,18 @@ function App() {
     if (query) {
       SearchFunction(query, 20).then(books => setSearchResults(books))
     }
-  }, [query])
+    // check if book id from books is in search results
+    // if yes, set the shelf of the book to the shelf of the book in books
+    // if not, set the shelf of the book to none
+    const checkShelf = (book) => {
+      if (books.find(b => b.id === book.id)) {
+        return books.find(b => b.id === book.id).shelf
+      } else {
+        return 'none'
+      }
+    }
+    setSearchResults(searchResults.map(book => ({ ...book, shelf: checkShelf(book) })))
+  }, [query, books])
 
   return (
     <BrowserRouter>
