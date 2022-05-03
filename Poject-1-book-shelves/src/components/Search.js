@@ -13,7 +13,7 @@ const Search = ({ query, setQuery, searchResults, changeShelf }) => {
                         })` }}></div>
                         <div className="book-shelf-changer">
                             <select onChange={(e) => changeShelf(book, e.target.value)} value={book.shelf} >
-                                <option value="none" disabled selected>
+                                <option value="none" disabled >
                                     Move to...
                                 </option>
                                 <option value="currentlyReading">Currently Reading</option>

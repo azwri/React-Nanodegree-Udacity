@@ -26,20 +26,28 @@ function App() {
 
   useEffect(() => {
     if (query) {
-      SearchFunction(query, 20).then(books => setSearchResults(books))
+      SearchFunction(query, 100).then(books => setSearchResults(books))
     }
-    // check if book id from books is in search results
-    // if yes, set the shelf of the book to the shelf of the book in books
-    // if not, set the shelf of the book to none
-    const checkShelf = (book) => {
-      if (books.find(b => b.id === book.id)) {
-        return books.find(b => b.id === book.id).shelf
+  }, [query])
+
+  // if search results are not empty, check if the book is already in the books array
+  // if it is, set the shelf of the book to the shelf of the book in the books array
+  // if it is not, set the shelf of the book to the shelf of the book in the search results array
+  const checkIfBookIsInBooks = (book) => {
+      const bookInBooks = books.find(b => b.id === book.id)
+      if (bookInBooks) {
+        book.shelf = bookInBooks.shelf
       } else {
-        return 'none'
+        book.shelf = searchResults.find(b => b.id === book.id).shelf
       }
+  }
+
+  useEffect(() => {
+    if (searchResults.length > 0) {
+      searchResults.forEach(book => checkIfBookIsInBooks(book))
     }
-    setSearchResults(searchResults.map(book => ({ ...book, shelf: checkShelf(book) })))
-  }, [query, books])
+  }, [query,books, searchResults])
+
 
   return (
     <BrowserRouter>
