@@ -38,7 +38,8 @@ function App() {
       if (bookInBooks) {
         book.shelf = bookInBooks.shelf
       } else {
-        book.shelf = searchResults.find(b => b.id === book.id).shelf
+        // book.shelf = searchResults.find(b => b.id === book.id).shelf
+        book.shelf = 'none'
       }
   }
 
