@@ -35,7 +35,7 @@ const Search = ({ query, setQuery, searchResults, changeShelf }) => {
   return (
     <div className="search-books">
       <div className="search-books-bar">
-        <Link to="/" className="close-search">
+        <Link to="/" className="close-search" onClick={() => setQuery('')}>
           Close
         </Link>
         <div className="search-books-input-wrapper">

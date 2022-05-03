@@ -27,6 +27,8 @@ function App() {
   useEffect(() => {
     if (query) {
       SearchFunction(query, 100).then(books => setSearchResults(books))
+    } else {
+      setSearchResults([])
     }
   }, [query])
 
